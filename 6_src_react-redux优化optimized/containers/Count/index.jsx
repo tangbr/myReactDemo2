@@ -1,6 +1,19 @@
 import React, { Component } from 'react'
+//引入action
+import { 
+    createIncrementAction,
+    createDecrementAction,
+    createIncrementAsyncAction
+} from '../../redux/count_action'
 
-export default class Count extends Component {
+//引入connect用于连接UI组件与redux
+import {connect} from 'react-redux'
+//使用connect()()创建并暴露一个Count的容器组件
+/* const CountContainer = connect()(CountUI)
+export default CountContainer */
+
+//定义UI组件
+class Count extends Component {
 
     state = {carName:'奔驰c63'}
 
@@ -47,3 +60,21 @@ export default class Count extends Component {
     )
   }
 }
+
+
+
+export default connect(
+    state => ({count:state}),
+    //mapDispatchToProps的一般写法
+/*     dispatch => ({
+          jia:number=>dispatch(createIncrementAction(number)),
+          jian:number=>dispatch(createDecrementAction(number)),
+          jiaAsync:(number,time) => dispatch(createIncrementAsyncAction(number,time))
+        }) */
+        //mapDispatchToProps的精简写法
+{ 
+    jia:createIncrementAction,
+    jian:createDecrementAction,
+    jiaAsync:createIncrementAsyncAction
+}
+)(Count)
