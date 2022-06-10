@@ -7,7 +7,7 @@ export default function personReducer(preState=initState ,action){
     const {type,data} = action
     switch (type) {
         case ADD_PERSON:  //若是添加一个人
-            return [data,...preState]; //personReducer 要保持为纯函数， 而不能比如写出preState.unshift(data)之类
+            return [data,...preState]; //personReducer 要保持为纯函数
         default:
            return preState;
     }
